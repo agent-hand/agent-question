@@ -51,10 +51,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     // 接続先は runtime が `useRuntimeConfig().public.agentQuestion` で読む（`runtime/api-base.ts`）。
     // `defu` は先に入っている値を残すので、利用側が `runtimeConfig.public.agentQuestion` を直接
-    // 書いていればそれが勝ち、無ければ `agentQuestion` キー（または既定値）が入る
+    // 書いていればそれが勝ち、無ければ `agentQuestion` キー（または既定値）が入る。
+    // `options.apiBase` は `defaults` が必ず埋めるが、型は `ModuleOptions` の optional のままなので
+    // string と明示する
     nuxt.options.runtimeConfig.public.agentQuestion = defu(
       nuxt.options.runtimeConfig.public.agentQuestion as Partial<ModuleOptions> | undefined,
-      { apiBase: options.apiBase },
+      { apiBase: options.apiBase as string },
     );
   },
 });
