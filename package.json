@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "AI の問いを画面に出して回答を返す機構（面と往復）を提供する Nuxt module。@nuxt/ui の部品の上で働く",
   "repository": "agent-hand/agent-question",
+  "license": "MIT",
   "type": "module",
   "packageManager": "yarn@4.17.0",
   "exports": {
