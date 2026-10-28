@@ -42,6 +42,12 @@ export default defineNuxtConfig({
 | `#agent-question/channel/useSessionChannel` | セッションの WS チャンネルの購読 |
 | `#agent-question/types` | `Question` / `QuestionOption` / `Answer` / `Invocation` |
 
+型は Nuxt の外（Nitro・vitest・tsx など）からも package 名で引ける。
+
+```ts
+import type { Question, Answer } from '@agent-hand/agent-question/types';
+```
+
 振る舞いの規定は `openspec/specs/agent-question/spec.md`。
 
 ## 開発
