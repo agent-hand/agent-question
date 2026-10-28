@@ -54,6 +54,7 @@ import type { Question, Answer } from '@agent-hand/agent-question/types';
 
 ```sh
 yarn install
+yarn dev:prepare # clone 直後に1回。型と playground の .nuxt を作る
 yarn dev        # playground を起動する（stub サーバ付き）
 yarn build      # dist/ を作る
 yarn test
