@@ -1,0 +1,15 @@
+schema: specs-with-grill
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+context: |
+  agent-question は AI の問いを画面に出して回答を返す機構（問いを出す面と問いの往復）を提供する
+  Nuxt module（package 名 `@agent-hand/agent-question`、module 名 `agent-question`、`configKey` は
+  `agentQuestion`）。`@nuxt/ui` の部品の上で働く。
+
+  この openspec は agent-question 自身の振る舞いの規定を持つ。`specs/agent-question` は
+  stroke-board（`/opt/projects/stroke-board`）の `openspec/specs/agent-question` から
+  change `create-module-agent-question` で移したもの。module の振る舞いを変える change はここで起票する。
+
+  実装は `src/module.ts` と `src/runtime/**`、確認は `playground/`、テストは `test/`
+  （写し元の構造を写す: `src/runtime/waiting/useWaitingRetry.ts` ↔ `test/src/runtime/waiting/useWaitingRetry.test.ts`）。
