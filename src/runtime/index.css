@@ -1,0 +1,12 @@
+/*
+ * 利用側が `@import "@agent-hand/agent-question";` の1行で取り込む入口。
+ * `package.json` の `exports["."].style` がここ（build 後は `dist/runtime/index.css`）を指す。
+ *
+ * `@nuxt/ui` と同じ形（`@nuxt/ui/dist/runtime/index.css` の `@source "./components"`）。
+ * この package の中だけが名乗る Tailwind クラス（`border-primary` / `hover:border-inverted/30` など）を、
+ * 利用側に `@source` を書かせずに生成させる。`../` は build 後の `dist/` 全体で、`runtime/**` の
+ * `.vue` を含む。
+ */
+@import "./assets/agent-question.css";
+
+@source "../";

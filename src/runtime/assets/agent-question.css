@@ -1,0 +1,53 @@
+/*
+ * 面が使う見た目のうち、Tailwind のユーティリティでは書いていない2つ（design D8）。
+ *
+ * 写し元は stroke-board `app/assets/css/main.css` の `.sb-stroke-card` と `.sb-stroke-blink`
+ * （`@layer components` の中）。値は変えない。名前だけを module のものに改める——
+ * `sb-*` は stroke-board の接頭辞で、`@keyframes` の名前空間は文書全体で1つなので、
+ * 置く側の `main.css` に残る `sb-stroke-*` と衝突しない名前にする。
+ *
+ * 参照している変数は置く側の `main.css` のものではない。`--radius-lg` は Tailwind、
+ * `--ui-border` / `--ui-bg-elevated` は `@nuxt/ui` の theme が出す（どちらも peerDependency。design D13）。
+ */
+@layer components {
+  /*
+   * パネルの面。**角丸・枠・地だけを持ち、内側の余白は持たない。**
+   * 余白は使う側が役目に合わせて持つ（`AgentQuestion` の詳細説明は `p-3`）。
+   *
+   * `AgentQuestion` の選択肢のボタンはこの面に含めない。枠の色が選択の状態で変わるので、
+   * 面の定義に混ぜると持ち主が2人になる。
+   *
+   * **混色は `in oklab`。** ここは `bg-elevated/50` を写した先で、Tailwind が透明度付きの色を
+   * `color-mix(in oklab, …)` で出す（生成 CSS で確認）。`in srgb` で書くと色空間が変わり、
+   * 移す前と後で見た目がずれる。
+   */
+  .agent-question-card {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--ui-border);
+    background: color-mix(in oklab, var(--ui-bg-elevated) 50%, transparent);
+  }
+
+  /*
+   * 明滅。次の問いを待っている間（`WaitingIndicator`）に「まだ続いている」を示す。
+   */
+  @keyframes agent-question-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  .agent-question-blink {
+    animation: agent-question-blink 1.1s ease-in-out infinite;
+  }
+
+  /* 動きを抑える設定に従う。示す内容（待機）は文言が持つので、止めても伝わる */
+  @media (prefers-reduced-motion: reduce) {
+    .agent-question-blink {
+      animation: none;
+    }
+  }
+}
